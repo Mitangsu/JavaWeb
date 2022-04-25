@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE beans [
+        <!ELEMENT beans (bean*)>
+        <!ELEMENT bean (property*)>
+        <!ELEMENT property (#PCDATA)>
+
+        <!ATTLIST bean id ID #REQUIRED>
+        <!ATTLIST bean class CDATA #IMPLIED>
+        <!ATTLIST property name CDATA #IMPLIED>
+        <!ATTLIST property ref IDREF #IMPLIED>
+        ]>
+
+<beans>
+    <bean id="page" class="com.atguigu.myssm.myspringmvc.PageController"/>
+
+    <!-- DAO -->
+    <bean id="userDAO" class="book.impl.UserDAOImpl"/>
+    <bean id="bookDAO" class="book.impl.BookDAOImpl"/>
+    <bean id="cartItemDAO" class="book.impl.CartItemDAOImpl"/>
+    <bean id="orderDAO" class="book.impl.OrderDAOImpl"/>
+    <bean id="orderItemDAO" class="book.impl.OrderItemDAOImpl"/>
+
+    <!-- service -->
+    <bean id="userService" class="book.impl.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+    <bean id="bookService" class="book.impl.BookServiceImpl">
+        <property name="bookDAO" ref="bookDAO"/>
+    </bean>
+    <bean id="cartItemService" class="book.impl.CartItemServiceImpl">
+        <property name="cartItemDAO" ref="cartItemDAO"/>
+        <property name="bookService" ref="bookService"/>
+    </bean>
+    <bean id="orderService" class="book.impl.OrderServiceImpl">
+        <property name="orderDAO" ref="orderDAO"/>
+        <property name="orderItemDAO" ref="orderItemDAO"/>
+        <property name="cartItemDAO" ref="cartItemDAO"/>
+    </bean>
+    <!-- controller -->
+    <bean id="user" class="book.controller.UserController">
+        <property name="userService" ref="userService"/>
+        <property name="cartItemService" ref="cartItemService"/>
+    </bean>
+    <bean id="book" class="book.controller.BookController">
+        <property name="bookService" ref="bookService"/>
+    </bean>
+    <bean id="cart" class="book.controller.CartController">
+        <property name="cartItemService" ref="cartItemService"/>
+    </bean>
+    <bean id="order" class="book.controller.OrderController">
+        <property name="orderService" ref="orderService"/>
+    </bean>
+
+
+</beans>

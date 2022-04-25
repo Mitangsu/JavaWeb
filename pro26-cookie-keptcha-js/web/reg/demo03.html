@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script language="JavaScript">
+        //只会改变第一个o 如果reg后面添加g 表示全文匹配 i表示忽略大小写匹配
+        var reg = /o/gi;//new RegExp("abc")
+        var str ="abcobO";
+        str=str.replace(reg,'_');//替换的意思 将o替换成_
+        console.log(str);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
+<!--
+正则表达式的使用三步骤：
+1.定义正则表达式对象
+  正则表达式有两个方式：
+  1)对象形式
+  var reg =new RegExp("abc")
+  2)直接量形式
+  var reg= /abc/;
+2.定义待校验的字符串
+3.校验
+
+
+
+-->
